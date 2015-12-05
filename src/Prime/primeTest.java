@@ -11,12 +11,11 @@ public class primeTest {
 
 	/* TODO Emirp testing */
 	Scanner s = null;
-	static String outPutPath = "C:/Users/Max G/Documents/Java/output340.txt";
-	WriteFile wF = new WriteFile(outPutPath, true);
 
-	public primeTest(String path) throws IOException {
+	public primeTest(String path, String outPutPath) throws IOException {
 		try {
 
+			WriteFile wF = new WriteFile(outPutPath, true);
 			s = new Scanner(new BufferedReader(new FileReader(path)));
 			boolean prime = true;
 			ReadFile file = new ReadFile(path);
