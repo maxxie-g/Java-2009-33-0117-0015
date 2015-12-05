@@ -22,22 +22,26 @@ public class primeTest {
 			String[] textFile = file.OpenFile();
 			int j = textFile.length;
 
-			for (int i = 0; i < j; i++) { 
+			for (int i = 0; i < j; i++) {
 				// This iterates for the length of the file
 				prime = true;
 				int n = s.nextInt();
-				
+
 				if (n == 0) {
 					break;
 				}
-				for (int k = 2; k < n-1; k++) {
-					/* This iterates from 2 to one less than the number scanned
-					 * It also sets k to an int to be used later for modulus */
+				for (int k = 2; k < n - 1; k++) { // This is prime testing
+					/*
+					 * This iterates from 2 to one less than the number scanned
+					 * It also sets k to an int to be used later for modulus
+					 */
 					if (n % k == 0) {
-						/* The if statement finds if the remainder of n divided
-						 * by k is zero. If it is, then it will set prime to false
-						 * and print "n is not prime" where n is the read number.
-						 * Else, it prints "n is prime." */
+						/*
+						 * The if statement finds if the remainder of n divided
+						 * by k is zero. If it is, then it will set prime to
+						 * false and print "n is not prime" where n is the read
+						 * number. Else, it prints "n is prime."
+						 */
 						prime = false;
 						wF.writeToFile(n + " is not prime");
 						System.out.println(n + " is not prime");
@@ -46,10 +50,19 @@ public class primeTest {
 						prime = true;
 					}
 				}
-				if (prime == true) {
-					System.out.println(n + " is prime");
-					wF.writeToFile(n + " is prime");
-					
+				if (prime == true) { // This is emirp testing
+					for (int l = j; l >= 2; l--) {
+						if (n % l == 0) {
+							String stringEmirp = n + " is an emirp";
+							System.out.println(stringEmirp);
+							wF.writeToFile(stringEmirp);
+							break;
+						} else {
+							String stringPrime = n + " is prime";
+							System.out.println(stringPrime);
+							wF.writeToFile(stringPrime);
+						}
+					}
 				}
 			}
 		} catch (IOException e) {
