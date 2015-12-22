@@ -2,8 +2,6 @@ package Prime;
 
 import java.io.IOException;
 
-import useFiles.WriteFile;
-
 public class Main {
 
 	static String path = "C:/Users/Max G/Documents/Java/competition.txt";

@@ -1,6 +1,7 @@
 package Prime;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
@@ -30,7 +31,7 @@ public class primeTest {
 				if (n == 0) {
 					break;
 				}
-				for (int k = 2; k < n - 1; k++) { // This is prime testing
+				for (int k = 2; k < (n / 2); k++) { // This is prime testing
 					/*
 					 * This iterates from 2 to one less than the number scanned
 					 * It also sets k to an int to be used later for modulus
@@ -46,11 +47,9 @@ public class primeTest {
 						wF.writeToFile(n + " is not prime");
 						System.out.println(n + " is not prime");
 						break;
-					} else {
-						prime = true;
-					}
+					} else {}
 				}
-				if (prime == true) { // This is emirp testing
+//				if (prime) { // This is emirp testing
 					for (int l = j; l >= 2; l--) {
 						if (n % l == 0) {
 							String stringEmirp = n + " is an emirp";
@@ -62,11 +61,22 @@ public class primeTest {
 							System.out.println(stringPrime);
 							wF.writeToFile(stringPrime);
 						}
-					}
+//					}
 				}
 			}
 		} catch (IOException e) {
 			System.out.println("Here's what went wrong, bud: " + e.getMessage());
 		}
+	}
+	
+	public void convertToEmirp(String path, String outPutPath) throws FileNotFoundException {
+		/* TODO convert the primes into an emirp.
+		 * Proposal: read the numbers in as a string in an array,
+		 * 		have a way to spit the number into an int[] where
+		 * 		the numbers are reversed.
+		 */
+		WriteFile wF = new WriteFile(outPutPath, true);
+		s = new Scanner(new BufferedReader(new FileReader(path)));
+		ReadFile file = new ReadFile(path);
 	}
 }
