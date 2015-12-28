@@ -1,24 +1,27 @@
 package Prime;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
+
 import useFiles.ReadFile;
 import useFiles.WriteFile;
 
 public class primeTest {
 
 	/* TODO Emirp testing */
-	Scanner s = null;
-
+	List<Integer> primeInts = null;
+	boolean prime = true;
+	
 	public primeTest(String path, String outPutPath) throws IOException {
 		try {
 
-			WriteFile wF = new WriteFile(outPutPath, true);
+			Scanner s = null;
 			s = new Scanner(new BufferedReader(new FileReader(path)));
-			boolean prime = true;
+			WriteFile wF = new WriteFile(outPutPath, true);
 			ReadFile file = new ReadFile(path);
 			String[] textFile = file.OpenFile();
 			int j = textFile.length;
@@ -47,36 +50,24 @@ public class primeTest {
 						wF.writeToFile(n + " is not prime");
 						System.out.println(n + " is not prime");
 						break;
-					} else {}
-				}
-//				if (prime) { // This is emirp testing
-					for (int l = j; l >= 2; l--) {
-						if (n % l == 0) {
-							String stringEmirp = n + " is an emirp";
-							System.out.println(stringEmirp);
-							wF.writeToFile(stringEmirp);
-							break;
-						} else {
-							String stringPrime = n + " is prime";
-							System.out.println(stringPrime);
-							wF.writeToFile(stringPrime);
+					} else {
+						prime = true;
+						for (int index = 1; index < j; index++) {
+							primeInts.add(index, n);
 						}
-//					}
+					}
 				}
 			}
+			s.close();
 		} catch (IOException e) {
 			System.out.println("Here's what went wrong, bud: " + e.getMessage());
 		}
 	}
 	
-	public void convertToEmirp(String path, String outPutPath) throws FileNotFoundException {
-		/* TODO convert the primes into an emirp.
-		 * Proposal: read the numbers in as a string in an array,
-		 * 		have a way to spit the number into an int[] where
-		 * 		the numbers are reversed.
-		 */
-		WriteFile wF = new WriteFile(outPutPath, true);
-		s = new Scanner(new BufferedReader(new FileReader(path)));
-		ReadFile file = new ReadFile(path);
-	}
+//	public void emirpConversion() {
+//		int emirp;
+//		String trueEmirp = " is an emirp";
+//		String truePrime = " is prime";
+//		
+//	}
 }
