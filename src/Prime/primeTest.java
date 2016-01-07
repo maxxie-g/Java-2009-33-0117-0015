@@ -6,23 +6,31 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
 import useFiles.ReadFile;
 import useFiles.WriteFile;
 
 public class primeTest {
 
-	/* TODO Emirp testing */
-	List<Integer> primeInts = null;
+	List<Integer> primeInts = new ArrayList<Integer>();
 	boolean prime = true;
-	
-	public primeTest(String path, String outPutPath) throws IOException {
+
+	/*
+	 * pseudocode:
+	 * 		testNumber(originalNumber);
+	 * 		newNumber = reverseNumber(originalNumber);
+	 * 		restNumber(newNumber);
+	 * testNumber: all of the logic for prime testing
+	 * orginalNumber: the number read from the file
+	 * reverseNumber: reverses numbers
+	 * newNumber: the reverse of originalNumber
+	 */
+
+	public primeTest(String inputPath, String outPutPath) throws IOException {
 		try {
 
-			Scanner s = null;
-			s = new Scanner(new BufferedReader(new FileReader(path)));
-			WriteFile wF = new WriteFile(outPutPath, true);
-			ReadFile file = new ReadFile(path);
+			Scanner	s = new Scanner(new BufferedReader(new FileReader(inputPath)));
+			WriteFile wF = new WriteFile(outPutPath, false);
+			ReadFile file = new ReadFile(inputPath);
 			String[] textFile = file.OpenFile();
 			int j = textFile.length;
 
@@ -32,29 +40,35 @@ public class primeTest {
 				int n = s.nextInt();
 
 				if (n == 0) {
+					// If n is 0, the program terminates
 					break;
-				}
-				for (int k = 2; k < (n / 2); k++) { // This is prime testing
-					/*
-					 * This iterates from 2 to one less than the number scanned
-					 * It also sets k to an int to be used later for modulus
-					 */
-					if (n % k == 0) {
+				} else {
+					for (int k = 2; k < (n / 2); k++) { // This is prime testing
 						/*
-						 * The if statement finds if the remainder of n divided
-						 * by k is zero. If it is, then it will set prime to
-						 * false and print "n is not prime" where n is the read
-						 * number. Else, it prints "n is prime."
+						 * This iterates from 2 to one less than half the number
+						 * scanned
 						 */
-						prime = false;
-						wF.writeToFile(n + " is not prime");
-						System.out.println(n + " is not prime");
-						break;
-					} else {
-						prime = true;
-						for (int index = 1; index < j; index++) {
-							primeInts.add(index, n);
+						if (n % k == 0) {
+							/*
+							 * The if statement finds if the remainder of n
+							 * divided by k is zero. If it is, then it will set
+							 * prime to false and print "n is not prime" where n
+							 * is the read number. Else, it prints "n is prime."
+							 */
+							prime = false;
+							wF.writeToFile(n + " is not prime");
+							System.out.println(n + " is not prime");
+							break;
+						} else {
+							prime = true;
 						}
+					}
+				}
+				if (prime) {
+					wF.writeToFile(n + " is prime");
+					System.out.println(n + " is prime");
+					for (int index = 0; index < j; index++) {
+						primeInts.add(n);
 					}
 				}
 			}
@@ -63,11 +77,4 @@ public class primeTest {
 			System.out.println("Here's what went wrong, bud: " + e.getMessage());
 		}
 	}
-	
-//	public void emirpConversion() {
-//		int emirp;
-//		String trueEmirp = " is an emirp";
-//		String truePrime = " is prime";
-//		
-//	}
 }

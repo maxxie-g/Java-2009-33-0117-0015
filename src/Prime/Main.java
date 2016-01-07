@@ -4,9 +4,9 @@ import java.io.IOException;
 
 public class Main {
 
-	static String path = "C:/Users/Max G/Documents/Java/competition.txt";
-	static String outPutPath = "C:/Users/Max G/Documents/Java/output340.txt";
-	
+	static String path = "./competition.txt";
+	static String outPutPath = "./output340.txt";
+
 	@SuppressWarnings("unused")
 	public static void main(String[] args) {
 		try {
