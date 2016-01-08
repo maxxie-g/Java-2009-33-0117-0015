@@ -7,13 +7,9 @@ public class Main {
 	static String path = "./competition.txt";
 	static String outPutPath = "./output340.txt";
 
-	@SuppressWarnings("unused")
-	public static void main(String[] args) {
-		try {
-			primeTest pT = new primeTest(path, outPutPath);
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
+	public static void main(String[] args) throws IOException {
+		primeTest pT = new primeTest();
+		pT.original_number(path);
+		pT.intTest(outPutPath);
 	}
-
 }
