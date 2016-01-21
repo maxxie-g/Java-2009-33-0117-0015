@@ -1,6 +1,7 @@
 package Prime;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
 
@@ -9,7 +10,10 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		primeTest pT = new primeTest();
-		pT.original_number(path);
-		pT.intTest(outPutPath);
+		List<Integer> originalNumber = pT.original_number(path);
+
+		pT.intTest(outPutPath, originalNumber);
+		List<Integer> reverseNumber = pT.reverseNumber();
+		pT.intTest(outPutPath, reverseNumber);
 	}
 }

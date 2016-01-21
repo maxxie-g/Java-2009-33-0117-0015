@@ -10,6 +10,7 @@ public class primeTest {
 
 	List<Integer> primeInts = new ArrayList<Integer>();
 	List<Integer> originalNumber = new ArrayList<Integer>();
+	List<Integer> reverseNumber = new ArrayList<Integer>();
 	boolean prime = true;
 
 	/*
@@ -31,50 +32,60 @@ public class primeTest {
 		return originalNumber;
 	}
 
-	public List<Integer> intTest(String outputPath) throws IOException {
+	public List<Integer> intTest(String outputPath, List<Integer> testInts) throws IOException {
 		WriteFile wF = new WriteFile(outputPath, false);
 		int n = 0;
-		
-		for (int i = 0; i < originalNumber.size(); i++) {
-			n = originalNumber.get(i);
-		}
 
-		for (int k = 2; k < (n / 2); k++) { // This is prime testing
-			/*
-			 * This iterates from 2 to one less than half the number scanned
-			 */
-			if (n % k == 0) {
-				/*
-				 * The if statement finds if the remainder of n divided by k
-				 * is zero. If it is, then it will set prime to false and
-				 * print "n is not prime" where n is the read number. Else,
-				 * it prints "n is prime."
-				 */
-				prime = false;
-				wF.writeToFile(n + " is not prime");
-				System.out.println(n + " is not prime");
+		for (int i = 0; i < testInts.size(); i++) {
+			n = testInts.get(i);
+			if (n == 0) {
 				break;
 			} else {
-				prime = true;
+				for (int k = 2; k < (n / 2); k++) { // This is prime testing
+					/*
+					 * This iterates from 2 to one less than half the number
+					 * scanned
+					 */
+					if (n % k == 0) {
+						/*
+						 * The if statement finds if the remainder of n divided
+						 * by k is zero. If it is, then it will set prime to
+						 * false and print "n is not prime" where n is the read
+						 * number. Else, it prints "n is prime."
+						 */
+						prime = false;
+						wF.writeToFile(n + " is not prime");
+						System.out.println(n + " is not prime");
+						break;
+					} else {
+						prime = true;
+					}
+				}
 			}
-		}
-
-		if (prime) {
-			wF.writeToFile(n + " is prime");
-			System.out.println(n + " is prime");
-			for (int index = 0; index < originalNumber.size(); index++) {
+			if (prime) {
+				wF.writeToFile(n + " is prime");
+				System.out.println(n + " is prime");
 				primeInts.add(n);
 			}
 		}
 		return primeInts;
 	}
 
-	public void reverseNumber(int number) {
-		
-	}
-	
-	public primeTest() throws IOException {
-		intTest(null);
-		original_number(null);
+	public List<Integer> reverseNumber(String outputPath) throws IOException {
+		int reverse = 0, q;
+
+		for (int i = 0; i < primeInts.size(); i++) {
+			q = primeInts.get(i);
+			reverse = 0;
+			while (q != 0) {
+				reverse = reverse * 10;
+				reverse = reverse + q % 10;
+				q = q / 10;
+			}
+			reverseNumber.add(reverse);
+		}
+		System.out.println("Reversed numbers:");
+
+		return reverseNumber;
 	}
 }
