@@ -12,8 +12,8 @@ public class Main {
 		primeTest pT = new primeTest();
 		List<Integer> originalNumber = pT.original_number(path);
 
-		pT.intTest(outPutPath, originalNumber);
+		pT.intTest(outPutPath, originalNumber, false);
 		List<Integer> reverseNumber = pT.reverseNumber();
-		pT.intTest(outPutPath, reverseNumber);
+		pT.intTest(outPutPath, reverseNumber, true);
 	}
 }

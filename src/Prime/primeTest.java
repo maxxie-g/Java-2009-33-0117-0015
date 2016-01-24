@@ -32,8 +32,14 @@ public class primeTest {
 		return originalNumber;
 	}
 
-	public List<Integer> intTest(String outputPath, List<Integer> testInts) throws IOException {
-		WriteFile wF = new WriteFile(outputPath, false);
+	public List<Integer> intTest(String outputPath, List<Integer> testInts, boolean emirp) throws IOException {
+		/*
+		 * outputPath: path specified for WriteFile class
+		 * testInts: List specified for testing
+		 * emirp: True: will print "n is an emirp."
+		 * 		  False: will print "n is prime."
+		 */
+		WriteFile wF = new WriteFile(outputPath, true);
 		int n = 0;
 
 		for (int i = 0; i < testInts.size(); i++) {
@@ -48,7 +54,7 @@ public class primeTest {
 					 */
 					if (n % k == 0) {
 						/*
-						 * The if statement finds if the remainder of n divided
+						 * The 'if' statement finds if the remainder of n divided
 						 * by k is zero. If it is, then it will set prime to
 						 * false and print "n is not prime" where n is the read
 						 * number. Else, it prints "n is prime."
@@ -63,15 +69,31 @@ public class primeTest {
 				}
 			}
 			if (prime) {
-				wF.writeToFile(n + " is prime");
-				System.out.println(n + " is prime");
-				primeInts.add(n);
+				/*
+				 * This is the code for prime handling
+				 */
+				if (emirp) {
+					/*
+					 * This is where the emirp boolean is used
+					 * If it is set to true, than it will write "n is an emirp."
+					 */
+					wF.writeToFile(n + " is an emirp");
+					System.out.println(n + " is an emirp");
+				} else {
+					/*
+					 * If emirp isn't true, than it will be prime and print
+					 * "n is prime."
+					 */
+					wF.writeToFile(n + " is prime");
+					System.out.println(n + " is prime");
+					primeInts.add(n);
+				}
 			}
 		}
 		return primeInts;
 	}
 
-	public List<Integer> reverseNumber(String outputPath) throws IOException {
+	public List<Integer> reverseNumber() throws IOException {
 		int reverse = 0, q;
 
 		for (int i = 0; i < primeInts.size(); i++) {
@@ -85,7 +107,7 @@ public class primeTest {
 			reverseNumber.add(reverse);
 		}
 		System.out.println("Reversed numbers:");
-
+		
 		return reverseNumber;
 	}
 }
